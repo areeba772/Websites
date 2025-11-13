@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="bg-gray-800 text-white p-4 shadow-md">
+    <header className="flex justify-between items-center py-4 px-6 bg-gray-800 text-white shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold">
-          My eCommerce
+          My E-Commerce
         </Link>
         <nav className="hidden md:flex space-x-4">
           {" "}
