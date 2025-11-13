@@ -1,18 +1,35 @@
 // server/server.js
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config(); // Load environment variables
+const dotenv = require("dotenv");
+
+// Load environment variables (MONGODB_URI and PORT)
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.json()); // Allows parsing of JSON request bodies
+// Middleware
+app.use(cors()); // Enable Cross-Origin Resource Sharing (crucial for frontend/backend communication)
+app.use(express.json()); // Body parser for incoming JSON data
 
+// 🎯 Database Connection
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected successfully using Compass!"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+// 🎯 Integrate Product Routes
+// Any request starting with /api/products will be handled by productRoutes.js
+app.use("/api/products", require("./routes/productRoutes"));
+
+// Basic server test route
 app.get("/", (req, res) => {
-  res.send("Hello from the Express Server!");
+  res.send("E-commerce Backend API Running");
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
