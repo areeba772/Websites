@@ -10,19 +10,19 @@ function Header() {
           to="/"
           className="text-white text-decoration-none fs-3 fw-bold mb-2 mb-md-0"
         >
-          E-COM
+          E-COMMERCE-WEBSITE
         </Link>
 
         {/* Navigation buttons */}
         <div className="d-flex gap-2">
+          <NavLink to="/" className="btn btn-outline-light btn-sm">
+            Home
+          </NavLink>
           <NavLink to="/products" className="btn btn-outline-light btn-sm">
-            All Products
+            Products
           </NavLink>
-          <NavLink to="/" className="btn btn-outline-light btn-sm">
-            Featured
-          </NavLink>
-          <NavLink to="/" className="btn btn-outline-light btn-sm">
-            New Arrivals
+          <NavLink to="/products" className="btn btn-outline-light btn-sm">
+            Cart
           </NavLink>
         </div>
       </div>
