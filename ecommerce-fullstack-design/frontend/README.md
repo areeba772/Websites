@@ -15,4 +15,10 @@ images setup
 backend connection with database mongodb compass
 <img width="959" height="482" alt="image" src="https://github.com/user-attachments/assets/24fcbffc-b9ee-44ec-82e8-e65b752d4af0" />
 <img width="953" height="305" alt="image" src="https://github.com/user-attachments/assets/be2b9fc3-228e-4315-a233-c6edabc53882" />
+backend working
+testing on thunderclinet in vs code
+<img width="959" height="512" alt="image" src="https://github.com/user-attachments/assets/083d7dc8-33ec-4550-a615-fa530580c5ac" />
+mongodb show new product post in database 
+<img width="959" height="502" alt="image" src="https://github.com/user-attachments/assets/e7961c83-74fe-479e-af64-ecf8a9eac02a" />
+
 
