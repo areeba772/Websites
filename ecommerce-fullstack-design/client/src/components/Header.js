@@ -1,32 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="flex justify-between items-center py-4 px-6 bg-gray-800 text-white shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">
-          My E-Commerce
+    <header className="bg-dark text-white py-3 shadow">
+      <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+        {/* Brand */}
+        <Link
+          to="/"
+          className="text-white text-decoration-none fs-3 fw-bold mb-2 mb-md-0"
+        >
+          E-COM
         </Link>
-        <nav className="hidden md:flex space-x-4">
-          {" "}
-          {/* Desktop navigation */}
-          <Link to="/" className="hover:text-gray-300">
-            Home
-          </Link>
-          <Link to="/products" className="hover:text-gray-300">
-            Products
-          </Link>
-          <Link to="/cart" className="hover:text-gray-300">
-            Cart
-          </Link>
-          {/* Add more links later (e.g., Login, Admin) */}
-        </nav>
-        {/* Mobile menu icon (hamburger) would go here */}
-        <div className="md:hidden">
-          <button className="text-white focus:outline-none">
-            {/* You can use an icon library like Heroicons or Font Awesome */}☰
-          </button>
+
+        {/* Navigation buttons */}
+        <div className="d-flex gap-2">
+          <NavLink to="/products" className="btn btn-outline-light btn-sm">
+            All Products
+          </NavLink>
+          <NavLink to="/" className="btn btn-outline-light btn-sm">
+            Featured
+          </NavLink>
+          <NavLink to="/" className="btn btn-outline-light btn-sm">
+            New Arrivals
+          </NavLink>
         </div>
       </div>
     </header>

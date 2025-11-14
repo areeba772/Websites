@@ -1,0 +1,80 @@
+/* General body margin and fonts */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  margin: 20px auto;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 900px;
+}
+
+/* Cards container */
+.featured-products .row {
+  justify-content: center;
+}
+
+/* Cards styling */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Card images */
+.card-img-top {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Buttons consistent style */
+.btn-primary {
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
+}
+
+.btn-secondary {
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
+  background-color: #6c757d !important;
+  border: none !important;
+}
+
+/* Responsive grid tweaks */
+@media (max-width: 768px) {
+  .hero {
+    padding: 25px 10px;
+    font-size: 1.2rem;
+  }
+  .card-img-top {
+    height: 150px;
+  }
+}
+
+/* Navbar sticky and shadow */
+.navbar {
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.15);
+}
+
+/* Footer style */
+footer {
+  background-color: #343a40;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}

@@ -1,27 +1,31 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import ProductListingPage from "./pages/ProductListingPage";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
-import CartPage from "./pages/CartPage";
+import Home from "./components/Home";
+import ProductListing from "./components/ProductListing";
+import ProductDetails from "./components/ProductDetails";
+import Cart from "./components/Cart";
+import Login from "./components/Login";
+import ContactUs from "./components/ContactUs";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="d-flex flex-column min-vh-100">
         <Header />
-        <main className="container mx-auto p-4">
-          {" "}
-          {/* TailwindCSS container for centering */}
+        <main className="flex-grow-1">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<ProductListingPage />} />
-            <Route path="/products/:id" element={<ProductDetailsPage />} />{" "}
-            {/* :id is a URL parameter */}
-            <Route path="/cart" element={<CartPage />} />
-            {/* Add other routes as needed later */}
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<ProductListing />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/about" element={<AboutUs />} />
           </Routes>
         </main>
         <Footer />
