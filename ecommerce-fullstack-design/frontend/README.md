@@ -20,5 +20,11 @@ testing on thunderclinet in vs code
 <img width="959" height="512" alt="image" src="https://github.com/user-attachments/assets/083d7dc8-33ec-4550-a615-fa530580c5ac" />
 mongodb show new product post in database 
 <img width="959" height="502" alt="image" src="https://github.com/user-attachments/assets/e7961c83-74fe-479e-af64-ecf8a9eac02a" />
+put query
+<img width="952" height="268" alt="image" src="https://github.com/user-attachments/assets/2772a193-2805-4935-977a-05b7ea73fa35" />
+delete query 
+<img width="959" height="422" alt="image" src="https://github.com/user-attachments/assets/2558d207-a080-43a1-8303-895c5b882a98" />
+
+
 
 
