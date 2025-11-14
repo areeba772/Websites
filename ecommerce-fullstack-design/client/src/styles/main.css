@@ -1,0 +1,91 @@
+/* main.css */
+
+/* Body & Container */
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Header */
+header {
+  background-color: #343a40;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+header a.btn-outline-light {
+  border-color: white;
+}
+
+header a.btn-outline-light:hover {
+  background-color: #495057;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background-color: #343a40;
+  color: white;
+  padding: 15px 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Cards */
+.card {
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  max-height: 200px;
+  object-fit: contain;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+/* Cart badge */
+.badge {
+  font-size: 0.7rem;
+}
+
+/* Checkout form */
+.form-label {
+  font-weight: 600;
+}
+
+input,
+select {
+  border-radius: 5px;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}

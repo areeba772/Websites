@@ -8,29 +8,40 @@ import Home from "./components/Home";
 import ProductListing from "./components/ProductListing";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Profile from "./components/Profile";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
 
 import { CartProvider } from "./context/CartContext";
-import Checkout from "./components/Checkout";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <div className="d-flex flex-column min-vh-100">
+    <UserProvider>
+      <CartProvider>
+        <Router>
           <Header />
-          <main className="flex-grow-1 container my-4">
+          <main className="container my-4 flex-grow-1">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<ProductListing />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
             </Routes>
           </main>
           <Footer />
-        </div>
-      </Router>
-    </CartProvider>
+        </Router>
+      </CartProvider>
+    </UserProvider>
   );
 }
 

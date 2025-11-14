@@ -1,13 +1,14 @@
-// src/components/Login.js
+// src/components/Signup.js
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const { loginUser } = useContext(UserContext);
+const Signup = () => {
+  const { registerUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -19,19 +20,31 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const success = loginUser(formData);
+    const success = registerUser(formData);
     if (success) {
-      navigate("/profile"); // Redirect after login
+      navigate("/profile"); // Redirect to profile after signup
     } else {
-      setError("Invalid email or password!");
+      setError("Email already registered!");
     }
   };
 
   return (
     <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h2 className="mb-4">Login</h2>
+      <h2 className="mb-4">Signup</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Name</label>
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <div className="mb-3">
           <label className="form-label">Email</label>
           <input
@@ -57,11 +70,11 @@ const Login = () => {
         </div>
 
         <button type="submit" className="btn btn-primary w-100">
-          Login
+          Signup
         </button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
