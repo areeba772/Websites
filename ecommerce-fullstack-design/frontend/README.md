@@ -24,6 +24,9 @@ put query
 <img width="952" height="268" alt="image" src="https://github.com/user-attachments/assets/2772a193-2805-4935-977a-05b7ea73fa35" />
 delete query 
 <img width="959" height="422" alt="image" src="https://github.com/user-attachments/assets/2558d207-a080-43a1-8303-895c5b882a98" />
+add to cart full functionality
+<img width="951" height="475" alt="image" src="https://github.com/user-attachments/assets/26802473-903e-4ba3-bfdc-3abb197b09a8" />
+<img width="959" height="464" alt="image" src="https://github.com/user-attachments/assets/eb42dbd8-1ac0-4a89-9bb8-5e0fa0d2c752" />
 
 
 
