@@ -27,7 +27,11 @@ delete query
 add to cart full functionality
 <img width="951" height="475" alt="image" src="https://github.com/user-attachments/assets/26802473-903e-4ba3-bfdc-3abb197b09a8" />
 <img width="959" height="464" alt="image" src="https://github.com/user-attachments/assets/eb42dbd8-1ac0-4a89-9bb8-5e0fa0d2c752" />
+login and signup and profile pages
+<img width="956" height="482" alt="image" src="https://github.com/user-attachments/assets/d7f8d3b2-b4ca-433a-b796-8f0419b4594c" />
+<img width="959" height="487" alt="image" src="https://github.com/user-attachments/assets/d8a44a65-706a-4220-a8a3-82b8e6f2c1e2" />
 
+<img width="959" height="490" alt="image" src="https://github.com/user-attachments/assets/b510c735-4690-4635-aa8f-e800153a8983" />
 
 
 
