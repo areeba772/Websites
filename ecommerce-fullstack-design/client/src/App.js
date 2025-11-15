@@ -1,6 +1,7 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { UserProvider } from "./context/UserContext";
+import { CartProvider } from "./context/CartContext";
+import { AdminProvider } from "./context/AdminContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -15,31 +16,37 @@ import Profile from "./components/Profile";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 
-import { CartProvider } from "./context/CartContext";
-import { UserProvider } from "./context/UserContext";
+import AdminLogin from "./components/admin/AdminLogin";
+import AdminDashboard from "./components/admin/AdminDashboard";
 
 function App() {
   return (
     <UserProvider>
       <CartProvider>
-        <Router>
-          <Header />
-          <main className="container my-4 flex-grow-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<ProductListing />} />
-              <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<ContactUs />} />
-            </Routes>
-          </main>
-          <Footer />
-        </Router>
+        <AdminProvider>
+          <Router>
+            <Header />
+            <main className="container my-4 flex-grow-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<ProductListing />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+
+                {/* Admin */}
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              </Routes>
+            </main>
+            <Footer />
+          </Router>
+        </AdminProvider>
       </CartProvider>
     </UserProvider>
   );

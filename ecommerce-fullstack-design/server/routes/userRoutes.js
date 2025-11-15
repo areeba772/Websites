@@ -1,65 +1,30 @@
 const express = require("express");
-const router = express.Router();
-const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const router = express.Router();
 
 // Register
-router.post("/register", async (req, res) => {
-  const { name, email, password, city, phone } = req.body;
-  try {
-    const userExists = await User.findOne({ email });
-    if (userExists)
-      return res.status(400).json({ message: "User already exists" });
-    const user = await User.create({ name, email, password, city, phone });
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
-    res.json({ token, user });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+router.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+  const exists = await User.findOne({ email });
+  if (exists) return res.status(400).json({ message: "Email exists" });
+
+  const user = await User.create({ name, email, password });
+  res.status(201).json(user);
 });
 
 // Login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: "Invalid credentials" });
-    const isMatch = await user.matchPassword(password);
-    if (!isMatch)
-      return res.status(401).json({ message: "Invalid credentials" });
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
-    res.json({ token, user });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  const user = await User.findOne({ email, password });
+  if (!user) return res.status(400).json({ message: "Invalid credentials" });
+
+  res.json(user);
 });
 
-// Get Profile (Protected)
-router.get("/profile/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id).select("-password");
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Update Profile
-router.put("/profile/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
-    Object.assign(user, req.body); // update fields
-    await user.save();
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Get all users
+router.get("/", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
 });
 
 module.exports = router;

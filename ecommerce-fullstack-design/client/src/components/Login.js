@@ -1,9 +1,8 @@
-// src/components/Login.js
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+function Login() {
   const { loginUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -11,57 +10,49 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = loginUser(formData);
-    if (success) {
-      navigate("/profile"); // Redirect after login
+    const result = await loginUser(formData);
+    if (result.success) {
+      navigate("/profile");
     } else {
-      setError("Invalid email or password!");
+      alert(result.message);
     }
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h2 className="mb-4">Login</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
+    <div className="container col-md-4 mt-5">
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary w-100">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          className="form-control my-2"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          className="form-control my-2"
+          required
+        />
+        <button className="btn btn-primary mt-2" type="submit">
           Login
         </button>
       </form>
     </div>
   );
-};
+}
 
 export default Login;

@@ -1,11 +1,12 @@
+// src/components/Header.js
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { UserContext } from "../context/UserContext";
 
 function Header() {
-  const { cartItems } = useContext(CartContext);
-  const { user } = useContext(UserContext);
+  const { cartItems } = useContext(CartContext); // Cart items count
+  const { currentUser, logoutUser } = useContext(UserContext); // Logged-in user info
 
   return (
     <header className="bg-dark text-white shadow-sm">
@@ -15,7 +16,7 @@ function Header() {
           to="/"
           className="text-white text-decoration-none fs-3 fw-bold mb-2 mb-md-0"
         >
-          E-COM
+          E-COMMERCE WEBSITE
         </Link>
 
         {/* Navigation buttons */}
@@ -75,34 +76,25 @@ function Header() {
             )}
           </NavLink>
 
-          {user ? (
-            <NavLink
-              to="/profile"
-              className="btn btn-outline-light btn-sm"
-              style={({ isActive }) => ({
-                fontWeight: isActive ? "bold" : "normal",
-              })}
-            >
-              {user.name}
-            </NavLink>
+          {/* User Authentication Buttons */}
+          {currentUser ? (
+            <>
+              <NavLink to="/profile" className="btn btn-outline-light btn-sm">
+                {currentUser.name}
+              </NavLink>
+              <button
+                onClick={logoutUser}
+                className="btn btn-outline-light btn-sm"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
-              <NavLink
-                to="/login"
-                className="btn btn-outline-light btn-sm"
-                style={({ isActive }) => ({
-                  fontWeight: isActive ? "bold" : "normal",
-                })}
-              >
+              <NavLink to="/login" className="btn btn-outline-light btn-sm">
                 Login
               </NavLink>
-              <NavLink
-                to="/signup"
-                className="btn btn-outline-light btn-sm"
-                style={({ isActive }) => ({
-                  fontWeight: isActive ? "bold" : "normal",
-                })}
-              >
+              <NavLink to="/signup" className="btn btn-outline-light btn-sm">
                 Signup
               </NavLink>
             </>
