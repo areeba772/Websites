@@ -32,6 +32,8 @@ login and signup and profile pages
 <img width="959" height="487" alt="image" src="https://github.com/user-attachments/assets/d8a44a65-706a-4220-a8a3-82b8e6f2c1e2" />
 
 <img width="959" height="490" alt="image" src="https://github.com/user-attachments/assets/b510c735-4690-4635-aa8f-e800153a8983" />
+admin panel
+<img width="959" height="536" alt="image" src="https://github.com/user-attachments/assets/c0694d47-e75b-4953-8f49-13b5d2a8db09" />
 
 
 
