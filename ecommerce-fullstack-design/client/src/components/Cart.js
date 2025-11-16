@@ -1,67 +1,115 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
+import { useNavigate, Link } from "react-router-dom";
 
 function Cart() {
-  const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const { cartItems, removeFromCart, updateQuantity, clearCart, getCartTotal } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const total = getCartTotal();
 
-  if (cartItems.length === 0)
+  if (cartItems.length === 0) {
     return (
-      <div>
+      <div className="text-center py-5">
         <h2>Your Cart is Empty</h2>
-        <a href="/products" className="btn btn-primary mt-3">
-          Go to Products
-        </a>
+        <p className="text-muted mb-4">Add some products to your cart to get started!</p>
+        <Link to="/products" className="btn btn-primary btn-lg">
+          Continue Shopping
+        </Link>
       </div>
     );
+  }
 
   return (
     <div>
-      <h2>Shopping Cart</h2>
-      {cartItems.map((item) => (
-        <div
-          key={item.id}
-          className="d-flex justify-content-between align-items-center border p-2 mb-2"
-        >
-          <div className="d-flex align-items-center">
-            <img
-              src={item.image}
-              alt={item.name}
-              style={{ width: "60px", height: "60px", objectFit: "contain" }}
-              className="me-3"
-            />
-            <div>
-              <h5>{item.name}</h5>
-              <p>
-                ${item.price.toFixed(2)} x {item.quantity}
-              </p>
+      <h2 className="mb-4">Shopping Cart</h2>
+      
+      <div className="row">
+        <div className="col-md-8">
+          {cartItems.map((item) => (
+            <div
+              key={item._id}
+              className="card mb-3 shadow-sm"
+            >
+              <div className="card-body">
+                <div className="row align-items-center">
+                  <div className="col-md-2 text-center">
+                    <img
+                      src={item.image?.startsWith("http") ? item.image : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}${item.image}`}
+                      alt={item.name}
+                      className="img-fluid"
+                      style={{ maxHeight: "100px", maxWidth: "100%", objectFit: "contain" }}
+                      onError={(e) => {
+                        e.target.src = "https://via.placeholder.com/150x150?text=No+Image";
+                      }}
+                    />
+                  </div>
+                  <div className="col-md-4">
+                    <h5 className="card-title">{item.name}</h5>
+                    <p className="text-muted small mb-0">{item.category}</p>
+                    <p className="text-primary fw-bold mb-0">${item.price.toFixed(2)}</p>
+                  </div>
+                  <div className="col-md-3">
+                    <label className="form-label small">Quantity:</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      min="1"
+                      max={item.stock || 999}
+                      value={item.quantity}
+                      onChange={(e) => updateQuantity(item._id, parseInt(e.target.value) || 1)}
+                    />
+                  </div>
+                  <div className="col-md-2 text-end">
+                    <p className="fw-bold">${(item.price * item.quantity).toFixed(2)}</p>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => removeFromCart(item._id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="col-md-4">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h5 className="card-title mb-4">Order Summary</h5>
+              <div className="d-flex justify-content-between mb-3">
+                <span>Items ({cartItems.reduce((sum, item) => sum + item.quantity, 0)})</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+              <hr />
+              <div className="d-flex justify-content-between mb-4">
+                <strong>Total:</strong>
+                <strong className="text-primary">${total.toFixed(2)}</strong>
+              </div>
+              <button
+                className="btn btn-success w-100 btn-lg mb-2"
+                onClick={() => navigate("/checkout")}
+              >
+                Proceed to Checkout
+              </button>
+              <button
+                className="btn btn-outline-secondary w-100"
+                onClick={clearCart}
+              >
+                Clear Cart
+              </button>
+              <Link
+                to="/products"
+                className="btn btn-outline-primary w-100 mt-2"
+              >
+                Continue Shopping
+              </Link>
             </div>
           </div>
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => removeFromCart(item.id)}
-          >
-            Remove
-          </button>
         </div>
-      ))}
-      <h4>Total: ${total.toFixed(2)}</h4>
-      {/* ✅ Updated button to navigate to checkout page */}
-      <button
-        className="btn btn-success me-2"
-        onClick={() => navigate("/checkout")}
-      >
-        Proceed to Checkout
-      </button>
-      <button className="btn btn-secondary" onClick={clearCart}>
-        Clear Cart
-      </button>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,81 @@
+/* Admin.css */
+
+/* General container */
+.admin-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Tables */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.admin-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Buttons */
+.admin-btn {
+  padding: 5px 12px;
+  margin: 2px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.admin-btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.admin-btn-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Forms */
+.admin-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  margin-bottom: 10px;
+}
+
+.admin-form button {
+  margin-right: 5px;
+}
+
+/* Images */
+.admin-img {
+  border-radius: 5px;
+  width: 60px;
+  height: auto;
+}

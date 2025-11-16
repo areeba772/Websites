@@ -1,52 +1,45 @@
-// client/src/context/AdminContext.js
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import axios from "axios";
 
 export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const [admin, setAdmin] = useState(() => {
-    const raw = localStorage.getItem("adminData");
-    return raw ? JSON.parse(raw) : null;
-  });
-  const [token, setToken] = useState(
-    () => localStorage.getItem("adminToken") || null
-  );
+  const [token, setToken] = useState(localStorage.getItem("adminToken"));
 
-  const save = (t, adminObj) => {
-    setToken(t);
-    setAdmin(adminObj);
-    if (t) localStorage.setItem("adminToken", t);
-    else localStorage.removeItem("adminToken");
-    if (adminObj) localStorage.setItem("adminData", JSON.stringify(adminObj));
-    else localStorage.removeItem("adminData");
-  };
+  const authHeaders = () => ({
+    Authorization: `Bearer ${token}`,
+  });
 
   const loginAdmin = async (email, password) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/login", {
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      console.log("Attempting admin login with:", email);
+      const { data } = await axios.post(`${apiUrl}/admin/login`, {
         email,
         password,
       });
-      save(res.data.token, res.data.admin);
-      return { success: true };
-    } catch (err) {
-      return {
-        success: false,
-        message: err.response?.data?.message || err.message,
-      };
+      
+      if (data.token) {
+        setToken(data.token);
+        localStorage.setItem("adminToken", data.token);
+        console.log("Admin login successful");
+      } else {
+        throw new Error("No token received");
+      }
+    } catch (error) {
+      console.error("Admin login error:", error.response?.data || error.message);
+      throw error;
     }
   };
 
   const logoutAdmin = () => {
-    save(null, null);
+    setToken(null);
+    localStorage.removeItem("adminToken");
   };
-
-  const authHeaders = () => ({ Authorization: `Bearer ${token}` });
 
   return (
     <AdminContext.Provider
-      value={{ admin, token, loginAdmin, logoutAdmin, authHeaders }}
+      value={{ token, authHeaders, loginAdmin, logoutAdmin }}
     >
       {children}
     </AdminContext.Provider>

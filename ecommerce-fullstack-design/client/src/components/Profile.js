@@ -1,82 +1,77 @@
 // src/components/Profile.js
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
-  const { currentUser, updateUser, logoutUser } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: currentUser?.name || "",
-    email: currentUser?.email || "",
-    password: currentUser?.password || "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    updateUser(formData);
-    alert("Profile updated successfully!");
-  };
-
-  if (!currentUser) {
+  if (!user) {
     return (
       <div className="container mt-5">
-        <h3>Please login to view your profile.</h3>
+        <div className="alert alert-warning">
+          <h3>Please login to view your profile.</h3>
+          <button className="btn btn-primary mt-2" onClick={() => navigate("/login")}>
+            Go to Login
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "500px" }}>
-      <h2 className="mb-4">Profile</h2>
-      <form onSubmit={handleUpdate}>
-        <div className="mb-3">
-          <label className="form-label">Name</label>
-          <input
-            type="text"
-            name="name"
-            className="form-control"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow">
+            <div className="card-body p-4">
+              <h2 className="card-title mb-4">User Profile</h2>
+              
+              <div className="mb-4">
+                <h5>Account Information</h5>
+                <hr />
+                <div className="mb-3">
+                  <label className="form-label fw-bold">Full Name:</label>
+                  <p className="form-control-plaintext">{user.name}</p>
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label fw-bold">Email:</label>
+                  <p className="form-control-plaintext">{user.email}</p>
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label fw-bold">User ID:</label>
+                  <p className="form-control-plaintext text-muted small">{user._id}</p>
+                </div>
+              </div>
+
+              <div className="d-flex gap-2">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => navigate("/products")}
+                >
+                  Continue Shopping
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn btn-success me-2">
-          Update Profile
-        </button>
-
-        <button type="button" className="btn btn-danger" onClick={logoutUser}>
-          Logout
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

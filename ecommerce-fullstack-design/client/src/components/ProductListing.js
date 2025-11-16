@@ -1,45 +1,129 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-// Import product images from assets
-import coffeeMakerImg from "../assets/products/coffee-maker.png";
-import headphonesImg from "../assets/products/headphones.png";
-import tshirtImg from "../assets/products/t-shirt.png";
-
-const products = [
-  { id: 1, name: "Coffee Maker", price: 129.99, image: coffeeMakerImg },
-  { id: 2, name: "Headphones", price: 249.0, image: headphonesImg },
-  { id: 3, name: "T-Shirt", price: 39.5, image: tshirtImg },
-];
+import api from "../utils/api";
 
 function ProductListing() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [searchTerm, selectedCategory]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const params = {};
+      if (searchTerm) params.keyword = searchTerm;
+      if (selectedCategory) params.category = selectedCategory;
+
+      const response = await api.get("/products", { params });
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await api.get("/products");
+      const uniqueCategories = [...new Set(response.data.map((p) => p.category))];
+      setCategories(uniqueCategories);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
   return (
     <div>
-      <h2 className="mb-4">Products</h2>
-      <div className="row">
-        {products.map((product) => (
-          <div key={product.id} className="col-md-4 mb-3">
-            <div className="card h-100 shadow-sm">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="card-img-top p-3"
-                style={{ height: "200px", objectFit: "contain" }}
-              />
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title">{product.name}</h5>
-                <p className="card-text">${product.price.toFixed(2)}</p>
-                <Link
-                  to={`/product/${product.id}`}
-                  className="btn btn-primary mt-auto"
-                >
-                  View Details
-                </Link>
+      <h2 className="mb-4">All Products</h2>
+
+      {/* Search and Filter Section */}
+      <div className="row mb-4">
+        <div className="col-md-6 mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search products by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="col-md-6 mb-3">
+          <select
+            className="form-select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">All Categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Products Grid */}
+      {loading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : products.length === 0 ? (
+        <div className="alert alert-info">
+          No products found. Try adjusting your search or filter.
+        </div>
+      ) : (
+        <div className="row">
+          {products.map((product) => (
+            <div key={product._id} className="col-lg-4 col-md-6 mb-4">
+              <div className="card h-100 shadow-sm">
+                <div className="text-center p-3" style={{ height: "250px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#f8f9fa" }}>
+                  <img
+                    src={product.image?.startsWith("http") ? product.image : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}${product.image}`}
+                    alt={product.name}
+                    className="img-fluid"
+                    style={{ maxHeight: "200px", maxWidth: "100%", objectFit: "contain" }}
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/300x300?text=No+Image";
+                    }}
+                  />
+                </div>
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{product.name}</h5>
+                  <p className="card-text text-muted small">{product.category}</p>
+                  <p className="card-text">
+                    <span className="fw-bold text-primary">${product.price.toFixed(2)}</span>
+                    {product.stock > 0 ? (
+                      <span className="badge bg-success ms-2">In Stock</span>
+                    ) : (
+                      <span className="badge bg-danger ms-2">Out of Stock</span>
+                    )}
+                  </p>
+                  <Link
+                    to={`/product/${product._id}`}
+                    className="btn btn-primary mt-auto"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
