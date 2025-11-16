@@ -26,10 +26,6 @@ delete query
 <img width="959" height="422" alt="image" src="https://github.com/user-attachments/assets/2558d207-a080-43a1-8303-895c5b882a98" />
 add to cart full functionality
 <img width="951" height="475" alt="image" src="https://github.com/user-attachments/assets/26802473-903e-4ba3-bfdc-3abb197b09a8" />
-
-
-
-
 <img width="959" height="464" alt="image" src="https://github.com/user-attachments/assets/eb42dbd8-1ac0-4a89-9bb8-5e0fa0d2c752" />
 login and signup and profile pages
 <img width="956" height="482" alt="image" src="https://github.com/user-attachments/assets/d7f8d3b2-b4ca-433a-b796-8f0419b4594c" />
@@ -40,6 +36,9 @@ admin panel
 <img width="959" height="536" alt="image" src="https://github.com/user-attachments/assets/c0694d47-e75b-4953-8f49-13b5d2a8db09" />
 final video 
 run frontend and backend + view products add to cart then process to checkout
-
 https://github.com/user-attachments/assets/a8c68e28-2c0d-4605-8ac5-a3bdbb76514b
+admin panel video where admiin login and perform crud opertions
+https://github.com/user-attachments/assets/2a4c6752-5243-4242-a63d-2b9f809a1c67
+
+
 
