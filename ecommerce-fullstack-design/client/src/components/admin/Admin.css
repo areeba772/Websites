@@ -1,81 +1,266 @@
-/* Admin.css */
+/* ======================================= */
+/* 1. GLOBAL LAYOUT AND STRUCTURE STYLING */
+/* ======================================= */
 
-/* General container */
-.admin-container {
-  background-color: #f9f9f9;
+/* Body/Root Background and Font */
+body {
+  /* Main body background color jaisa design mein hai */
+  background-color: #f7f9fa;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* --- Main 3-Column Layout Wrapper (used in AdminDashboard.js) --- */
+.dashboard-wrapper {
+  display: grid;
+  /* Grid structure: Left Sidebar (fixed width), Main Area (flexible), Right Sidebar (fixed width) */
+  grid-template-columns: 250px 1fr 300px;
+  min-height: 100vh;
+  gap: 0;
+}
+
+/* ======================================= */
+/* 2. SIDEBARS (LeftSidebar & RightSidebar) */
+/* ======================================= */
+
+.left-sidebar {
+  background-color: #ffffff; /* White background */
   padding: 20px;
-  border-radius: 8px;
+  /* Border aur halka shadow elevation ke liye */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  border-right: 1px solid #e0e0e0;
 }
 
-/* Tables */
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-.admin-table th {
-  background-color: #343a40;
-  color: #fff;
-}
-
-.admin-table tr:hover {
-  background-color: #f1f1f1;
-}
-
-/* Buttons */
-.admin-btn {
-  padding: 5px 12px;
-  margin: 2px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-.admin-btn-primary {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.admin-btn-danger {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.admin-btn-success {
-  background-color: #28a745;
-  color: #fff;
-}
-
-/* Forms */
-.admin-form {
-  background-color: #fff;
+.right-sidebar {
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+  border-left: 1px solid #e0e0e0;
 }
 
-.admin-form input,
-.admin-form textarea,
-.admin-form select {
+/* Sidebar Nav Links */
+.sidebar-nav-list {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-nav-list li {
   margin-bottom: 10px;
 }
-
-.admin-form button {
-  margin-right: 5px;
+.sidebar-nav-list a {
+  text-decoration: none;
+  color: #555;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+.sidebar-nav-list a:hover {
+  background-color: #f0f0f0;
 }
 
-/* Images */
-.admin-img {
+/* ======================================= */
+/* 3. MAIN CONTENT AND HEADER STYLING */
+/* ======================================= */
+
+.main-content-area {
+  padding: 20px 30px;
+  background-color: #f7f9fa; /* Main area background */
+}
+
+/* Admin Header Bar */
+.admin-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-title {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Custom Blue Button Style for Logout */
+.logout-btn {
+  background-color: #007bff; /* Primary Blue color */
+  color: white;
+  border: none;
+  padding: 8px 15px;
   border-radius: 5px;
-  width: 60px;
-  height: auto;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Promo Banner */
+.promo-banner {
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* ======================================= */
+/* 4. PRODUCT CARDS (used in AdminProducts.js) */
+/* ======================================= */
+
+/* Add Product Button */
+.add-product-btn {
+  background-color: #28a745; /* Green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+  transition: background-color 0.3s;
+}
+.add-product-btn:hover {
+  background-color: #1e7e34;
+}
+
+/* Products Grid Container */
+.product-grid-container {
+  display: grid;
+  /* Products ke liye 3-column layout */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* Individual Product Card Styling */
+.admin-product-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.admin-product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-image-wrapper {
+  height: 180px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s;
+}
+
+.card-details {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.product-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.info-label {
+  color: #777;
+  font-weight: 500;
+}
+
+.price-value {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.stock-value {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Card Actions (Buttons) */
+.card-actions {
+  display: flex;
+  padding: 10px 15px 15px;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+.btn-edit,
+.btn-delete {
+  flex-grow: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: white;
+}
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+.btn-delete {
+  background-color: #f1f1f1;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+.btn-delete:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* ======================================= */
+/* 5. RESPONSIVE DESIGN (Important!) */
+/* ======================================= */
+
+@media (max-width: 992px) {
+  /* Tablet size par sidebars ko hide karein */
+  .dashboard-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .left-sidebar,
+  .right-sidebar {
+    display: none;
+  }
+  .main-content-area {
+    padding: 15px;
+  }
+  .product-grid-container {
+    /* Chhoti screen par kam columns */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
 }

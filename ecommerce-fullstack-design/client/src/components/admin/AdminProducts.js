@@ -10,16 +10,24 @@ export default function AdminProducts({ products = [], refresh }) {
   const [adding, setAdding] = useState(false);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this product? This action cannot be undone.")) return;
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this product? This action cannot be undone."
+      )
+    )
+      return;
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const apiUrl =
+        process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       await axios.delete(`${apiUrl}/products/${id}`, {
         headers: authHeaders(),
       });
       refresh();
       alert("Product deleted successfully!");
     } catch (err) {
-      alert(err.response?.data?.message || err.message || "Failed to delete product");
+      alert(
+        err.response?.data?.message || err.message || "Failed to delete product"
+      );
     }
   };
 

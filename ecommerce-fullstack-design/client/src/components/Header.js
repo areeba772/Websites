@@ -101,7 +101,10 @@ function Header() {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink to="/signup" className="btn btn-outline-light btn-sm ms-2">
+                    <NavLink
+                      to="/signup"
+                      className="btn btn-outline-light btn-sm ms-2"
+                    >
                       Sign Up
                     </NavLink>
                   </li>
