@@ -34,6 +34,11 @@ login and signup and profile pages
 <img width="959" height="490" alt="image" src="https://github.com/user-attachments/assets/b510c735-4690-4635-aa8f-e800153a8983" />
 admin panel
 <img width="959" height="536" alt="image" src="https://github.com/user-attachments/assets/c0694d47-e75b-4953-8f49-13b5d2a8db09" />
+final video 
+run frontend and backend + view products add to cart then process to checkout
+https://github.com/user-attachments/assets/a8c68e28-2c0d-4605-8ac5-a3bdbb76514b
+admin panel video where admiin login and perform crud opertions
+https://github.com/user-attachments/assets/2a4c6752-5243-4242-a63d-2b9f809a1c67
 
 
 
